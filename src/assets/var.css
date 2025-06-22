@@ -1,0 +1,8 @@
+:root {
+    --primary-background-color: rgba(42, 37, 37, 1);
+    --secondary-background-color: rgba(32, 32, 32, 1);
+
+    --primary-font-color: white;
+
+    --main-border-color: rgba(55, 55, 55, 1);
+}

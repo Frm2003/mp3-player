@@ -1,0 +1,83 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faEllipsis,
+    faMusic,
+    faPlus,
+} from '@fortawesome/free-solid-svg-icons';
+
+// COMPONENTES AUTORAIS
+import List from '../../layout/List';
+
+// CONTEXTOS
+import { useModalContext } from '../../layout/Modal/context/ModalContext';
+import { useListFileContext } from '../../contexts/ListFileContext';
+
+// UTIKLS
+import type Musica from '../../utils/Musica';
+import style from './styles/style.module.css';
+import { usePlayerContext } from '../../contexts/playerContext';
+
+function RenderList(item: Musica) {
+    const { state, setState } = usePlayerContext();
+
+    const { audio } = state;
+
+    const play = async (musica: Musica): Promise<void> => {
+        if (audio) audio.pause();
+        
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        const newAudio = new Audio(musica.arquivo);
+
+        newAudio.play();
+
+        setState({
+            audio: newAudio,
+            estado: 'played',
+            infoMusica: musica,
+        });
+    };
+
+    return (
+        <div className={style.itemList} style={{ padding: '1em' }}>
+            <div className={style.info} onClick={() => play(item)}>
+                <div className={style.icon}>
+                    <FontAwesomeIcon icon={faMusic} size={'1x'} />
+                </div>
+                <div className={style.text}>
+                    <h3>{item.nome}</h3>
+                    <span>{item.artista}</span>
+                </div>
+            </div>
+            <FontAwesomeIcon icon={faEllipsis} />
+        </div>
+    );
+};
+
+export default function ListMp3Files() {
+    // CONTEXTOS GLOBAIS
+    const { setShow } = useModalContext();
+
+    const { list } = useListFileContext();
+
+    // METODOS
+    const openModal = (): void => setShow((prevState: boolean) => !prevState);
+
+    return (
+        <section className={style.layout}>
+            <article>
+                <h2>Lista de reprodução</h2>
+                <FontAwesomeIcon
+                    icon={faPlus}
+                    size={'2x'}
+                    onClick={openModal}
+                />
+            </article>
+            <article>
+                <List.Root>
+                    <List.Body list={list} functionRender={RenderList} />
+                </List.Root>
+            </article>
+        </section>
+    );
+}

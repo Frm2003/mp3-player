@@ -1,0 +1,47 @@
+.layout {
+    align-items: center;
+    bottom: 72px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+}
+
+.layout .body {
+    background: var(--secondary-background-color);
+    border: 1px solid var(--main-border-color);
+    border-radius: 5px;
+    padding: 0.5em;
+    overflow: hidden;
+    width: 92%;
+}
+
+.layout .title {
+    float: left;
+    width: 75%;
+}
+
+.layout .btn {
+    background: var(--primary-background-color);
+    border: 1px solid var(--main-border-color);
+    border-radius: 5px;
+    float: right;
+    padding: 0.5em;
+    text-align: center;
+    width: 15%;
+}
+
+.layout article div h3 {
+    margin: 0;
+}
+
+.layout article div span {
+    font-weight: 200;
+}
+
+.layout progress {
+    background: none;
+    height: 1px;
+    padding: 0;
+    width: 100%;
+}
