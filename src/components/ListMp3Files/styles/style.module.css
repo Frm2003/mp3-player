@@ -21,21 +21,36 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+    padding: 1em;
     width: 100%;
 }
 
-.itemList .played {
-    color: green;
+.itemList * {
+    float: left;
 }
 
 .itemList .info {
-    justify-content: center;
-    align-items: center;
-    display: flex;
+    overflow-x: auto;
+    width: 72%;
 }
 
-.itemList .info .icon {
+.itemList .info * {
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.itemList>*:nth-child(odd) {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 2%;
+    width: 10%;
+}
+
+.itemList .icon {
+    background: var(--secondary-background-color);
+    border: 1px solid var(--main-border-color);
     border-radius: 5px;
-    padding: 0.5em;
-    margin: 0 0.5em 0 0;
+    padding: .5em;
 }

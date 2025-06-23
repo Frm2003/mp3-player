@@ -12,10 +12,10 @@ import List from '../../layout/List';
 import { useModalContext } from '../../layout/Modal/context/ModalContext';
 import { useListFileContext } from '../../contexts/ListFileContext';
 
-// UTIKLS
+// UTILS
 import type Musica from '../../utils/Musica';
-import style from './styles/style.module.css';
 import { usePlayerContext } from '../../contexts/playerContext';
+import style from './styles/style.module.css';
 
 function RenderList(item: Musica) {
     const { state, setState } = usePlayerContext();
@@ -24,11 +24,12 @@ function RenderList(item: Musica) {
 
     const play = async (musica: Musica): Promise<void> => {
         if (audio) audio.pause();
-        
+
         await new Promise((resolve) => setTimeout(resolve, 500));
 
         const newAudio = new Audio(musica.arquivo);
 
+        document.title = musica.nome;
         newAudio.play();
 
         setState({
@@ -39,17 +40,17 @@ function RenderList(item: Musica) {
     };
 
     return (
-        <div className={style.itemList} style={{ padding: '1em' }}>
-            <div className={style.info} onClick={() => play(item)}>
-                <div className={style.icon}>
-                    <FontAwesomeIcon icon={faMusic} size={'1x'} />
-                </div>
-                <div className={style.text}>
-                    <h3>{item.nome}</h3>
-                    <span>{item.artista}</span>
-                </div>
+        <div className={style.itemList}>
+            <div className={style.icon}>
+                <FontAwesomeIcon icon={faMusic} size={'1x'} />
             </div>
-            <FontAwesomeIcon icon={faEllipsis} />
+            <div className={style.info} onClick={() => play(item)}>
+                <h3>{item.nome}</h3>
+                <span>{item.artista}</span>
+            </div>
+            <div>
+                <FontAwesomeIcon icon={faEllipsis} />
+            </div>
         </div>
     );
 };
