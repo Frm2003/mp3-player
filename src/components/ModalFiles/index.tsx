@@ -11,14 +11,6 @@ export default function ModalFiles() {
     const { setList } = useListFileContext();
     const { setShow } = useModalContext();
 
-    const obterDuracao = (arquivo: string): Promise<number> => {
-        return new Promise((resolve, reject) => {
-            const audio = new Audio(arquivo);
-            audio.onloadedmetadata = () => resolve(audio.duration);
-            audio.onerror = () => reject('Erro ao carregar o arquivo');
-        });
-    };
-
     const loadFile = async (event: ChangeEvent<HTMLInputElement>) => {
         const files: FileList | null = event.target.files;
 
@@ -29,12 +21,10 @@ export default function ModalFiles() {
                     .split('-');
 
                 const arquivo = URL.createObjectURL(file);
-                const duracao: number = await obterDuracao(arquivo);
 
                 const musicaNova = new Musica(
                     nome,
                     '',
-                    duracao,
                     artista,
                     arquivo,
                     'mp3'
