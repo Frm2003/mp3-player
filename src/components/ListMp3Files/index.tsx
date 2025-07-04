@@ -11,26 +11,27 @@ import List from '../../layout/List';
 // CONTEXTOS
 import { useModalContext } from '../../layout/Modal/context/ModalContext';
 import { useListFileContext } from '../../contexts/ListFileContext';
+import { usePlayerContext } from '../../contexts/playerContext';
 
 // UTILS
-import type Musica from '../../utils/Musica';
-import { usePlayerContext } from '../../contexts/playerContext';
+import Musica from '../../utils/Musica';
 import style from './styles/style.module.css';
+
 
 function RenderList(item: Musica) {
     const { state, setState } = usePlayerContext();
-
     const { audio } = state;
 
     const play = async (musica: Musica): Promise<void> => {
         if (audio) audio.pause();
 
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        document.title = musica.nome;
 
         const newAudio = new Audio(musica.arquivo);
-
-        document.title = musica.nome;
-        newAudio.play();
+        await newAudio.play();
+        newAudio.addEventListener('ended', () => {
+            if (musica.next) play(musica.next);
+        });
 
         setState({
             audio: newAudio,
@@ -59,7 +60,7 @@ export default function ListMp3Files() {
     // CONTEXTOS GLOBAIS
     const { setShow } = useModalContext();
 
-    const { list } = useListFileContext();
+    const { fileList } = useListFileContext();
 
     // METODOS
     const openModal = (): void => setShow((prevState: boolean) => !prevState);
@@ -76,7 +77,7 @@ export default function ListMp3Files() {
             </article>
             <article>
                 <List.Root>
-                    <List.Body list={list} functionRender={RenderList} />
+                    <List.Body list={fileList.getArray()} functionRender={RenderList} />
                 </List.Root>
             </article>
         </section>

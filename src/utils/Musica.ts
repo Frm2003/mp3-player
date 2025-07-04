@@ -5,6 +5,9 @@ export default class Musica {
     arquivo: string;
     tipo: 'mp3' | 'youtube';
 
+    next: Musica | null;
+    back: Musica | null;
+
     constructor(
         nome: string,
         album: string | undefined,
@@ -17,5 +20,8 @@ export default class Musica {
         this.artista = artista;
         this.arquivo = arquivo;
         this.tipo = tipo;
+
+        this.next = null;
+        this.back = null;
     }
 }

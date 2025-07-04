@@ -1,40 +1,40 @@
 import { type ChangeEvent } from 'react';
 
 import { useModalContext } from '../../layout/Modal/context/ModalContext';
-import Musica from '../../utils/Musica';
-import Modal from '../../layout/Modal';
 import { useListFileContext } from '../../contexts/ListFileContext';
+
+import Modal from '../../layout/Modal';
+import Musica from '../../utils/Musica';
 
 import style from './styles/style.module.css';
 
 export default function ModalFiles() {
-    const { setList } = useListFileContext();
+    const { fileList } = useListFileContext();
     const { setShow } = useModalContext();
 
     const loadFile = async (event: ChangeEvent<HTMLInputElement>) => {
-        const files: FileList | null = event.target.files;
+        const files = event.target.files as FileList;
 
-        if (files) {
-            for (const file of files) {
-                const [artista, nome] = file.name
-                    .replace('.mp3', '')
-                    .split('-');
+        for (const file of files) {
+            const [artista, name] = file.name
+                .replace('.mp3', '')
+                .split('-');
 
-                const arquivo = URL.createObjectURL(file);
+            const url = URL.createObjectURL(file);
 
-                const musicaNova = new Musica(
-                    nome,
-                    '',
-                    artista,
-                    arquivo,
-                    'mp3'
-                );
+            const newMusic = new Musica(
+                name,
+                '',
+                artista,
+                url,
+                'mp3'
+            );
 
-                setList((prevList: Musica[]) => [...prevList, musicaNova]);
-            }
-
-            setShow(false);
+            fileList.push(newMusic);
         }
+
+        fileList.showAll();
+        setShow(false);
     };
 
     return (
@@ -59,3 +59,25 @@ export default function ModalFiles() {
         </>
     );
 }
+
+/*
+    for (const file of files) {
+                const [artista, nome] = file.name
+                    .replace('.mp3', '')
+                    .split('-');
+
+                const arquivo = URL.createObjectURL(file);
+
+                const musicaNova = new Musica(
+                    nome,
+                    '',
+                    artista,
+                    arquivo,
+                    'mp3'
+                );
+
+                setList((prevList: Musica[]) => [...prevList, musicaNova]);
+            }
+
+            setShow(false);
+*/

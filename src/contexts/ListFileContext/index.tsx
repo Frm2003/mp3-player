@@ -1,24 +1,20 @@
-'use client';
-
-
 import { createContext, type FC, type ReactNode, useContext, useState } from 'react';
 import type Musica from '../../utils/Musica';
+import { List } from '../../utils/List';
 
 interface iContext {
-    list: Musica[];
-    setList: React.Dispatch<React.SetStateAction<Musica[]>>;
+    fileList: List<Musica>;
 }
 
 const ListFileContext = createContext<iContext>({
-    list: [],
-    setList: () => { },
+    fileList: new List<Musica>(),
 });
 
 export const ListFileProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const [list, setList] = useState<Musica[]>([]);
+    const [fileList] = useState<List<Musica>>(new List());
 
     return (
-        <ListFileContext.Provider value={{ list, setList }}>
+        <ListFileContext.Provider value={{ fileList }}>
             {children}
         </ListFileContext.Provider>
     );
