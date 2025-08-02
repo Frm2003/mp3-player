@@ -17,8 +17,7 @@ import { usePlayerContext } from '../../contexts/playerContext';
 import Musica from '../../utils/Musica';
 import style from './styles/style.module.css';
 
-
-function RenderList(item: Musica) {
+const RenderList = (item: Musica) => {
     const { state, setState } = usePlayerContext();
     const { audio } = state;
 
@@ -59,7 +58,6 @@ function RenderList(item: Musica) {
 export default function ListMp3Files() {
     // CONTEXTOS GLOBAIS
     const { setShow } = useModalContext();
-
     const { fileList } = useListFileContext();
 
     // METODOS

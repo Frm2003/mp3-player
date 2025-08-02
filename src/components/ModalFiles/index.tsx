@@ -23,9 +23,9 @@ export default function ModalFiles() {
             const url = URL.createObjectURL(file);
 
             const newMusic = new Musica(
-                name,
+                name.trim(),
                 '',
-                artista,
+                artista.trim(),
                 url,
                 'mp3'
             );
@@ -33,7 +33,6 @@ export default function ModalFiles() {
             fileList.push(newMusic);
         }
 
-        fileList.showAll();
         setShow(false);
     };
 

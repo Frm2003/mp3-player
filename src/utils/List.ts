@@ -6,16 +6,20 @@ interface Linkable<T> {
 export class List<T extends Linkable<T>> {
     private first: T | null = null;
     private last: T | null = null;
-    private size: number;
+    private sizeCount: number;
 
     constructor() {
         this.first = null;
         this.last = null;
-        this.size = 0;
+        this.sizeCount = 0;
+    }
+
+    public size(): number {
+        return this.sizeCount;
     }
 
     public push(newItem: T): void {
-        this.size++;
+        this.sizeCount++;
 
         if (!this.last) {
             this.first = newItem;
@@ -56,7 +60,6 @@ export class List<T extends Linkable<T>> {
         const x = this.first;
         if (x) this.show(x);
     }
-
 
     private show(x: T): void {
         console.log(x);
