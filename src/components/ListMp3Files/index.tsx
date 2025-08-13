@@ -27,10 +27,20 @@ const RenderList = (item: Musica) => {
         document.title = musica.nome;
 
         const newAudio = new Audio(musica.arquivo);
-        await newAudio.play();
+
+        newAudio.addEventListener('pause', () => {
+            setState({
+                audio: newAudio,
+                estado: 'paused',
+                infoMusica: musica,
+            });
+        });
+
         newAudio.addEventListener('ended', () => {
             if (musica.next) play(musica.next);
         });
+
+        await newAudio.play();
 
         setState({
             audio: newAudio,
