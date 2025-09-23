@@ -17,9 +17,11 @@ export default function ModalLatoutTitle({ title }: iProps) {
     const closeModal = (): void => setShow(false);
 
     return (
-        <div className={style.title} onClick={closeModal}>
+        <div className={style.title}>
             <h3>{title}</h3>
-            <FontAwesomeIcon icon={faTimes} size={'2x'} />
+            <button onClick={closeModal}>
+                <FontAwesomeIcon icon={faTimes} size={'2x'} />
+            </button>
         </div>
     );
 }
