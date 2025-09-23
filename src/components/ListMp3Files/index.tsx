@@ -5,7 +5,7 @@ import {
     faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-// COMPONENTES AUTORAIS
+// COMPONENTES
 import List from '../../layout/List';
 
 // CONTEXTOS
@@ -15,14 +15,35 @@ import { usePlayerContext } from '../../contexts/playerContext';
 
 // UTILS
 import Musica from '../../utils/Musica';
-import style from './styles/style.module.css';
 
-const RenderList = (item: Musica) => {
+import './styles/style.css';
+
+const PatternItemOfList = (item: Musica, handleClick: (arg: Musica) => void) => {
+    return (
+        <>
+            <div>
+                <FontAwesomeIcon icon={faMusic} size={'1x'} />
+            </div>
+            <div className='info' onClick={() => handleClick(item)}>
+                <h3>{item.nome}</h3>
+                <span>{item.artista}</span>
+            </div>
+            <div>
+                <FontAwesomeIcon icon={faEllipsis} />
+            </div>
+        </>
+    );
+};
+
+export default function ListMp3Files() {
+    // CONTEXTOS GLOBAIS
+    const { setShow } = useModalContext();
+    const { fileList } = useListFileContext();
     const { state, setState } = usePlayerContext();
-    const { audio } = state;
 
+    // METODOS
     const play = async (musica: Musica): Promise<void> => {
-        if (audio) audio.pause();
+        if (state.audio) state.audio.pause();
 
         document.title = musica.nome;
 
@@ -49,45 +70,26 @@ const RenderList = (item: Musica) => {
         });
     };
 
-    return (
-        <div className={style.itemList}>
-            <div className={style.icon}>
-                <FontAwesomeIcon icon={faMusic} size={'1x'} />
-            </div>
-            <div className={style.info} onClick={() => play(item)}>
-                <h3>{item.nome}</h3>
-                <span>{item.artista}</span>
-            </div>
-            <div>
-                <FontAwesomeIcon icon={faEllipsis} />
-            </div>
-        </div>
-    );
-};
 
-export default function ListMp3Files() {
-    // CONTEXTOS GLOBAIS
-    const { setShow } = useModalContext();
-    const { fileList } = useListFileContext();
-
-    // METODOS
     const openModal = (): void => setShow((prevState: boolean) => !prevState);
 
     return (
-        <section className={style.layout}>
-            <article>
+        <>
+            <div className='title'>
                 <h2>Lista de reprodução</h2>
                 <FontAwesomeIcon
                     icon={faPlus}
                     size={'2x'}
                     onClick={openModal}
                 />
-            </article>
-            <article>
-                <List.Root>
-                    <List.Body list={fileList.getArray()} functionRender={RenderList} />
-                </List.Root>
-            </article>
-        </section>
+            </div>
+            <List.Root>
+                <List.Body
+                    click={play}
+                    functionRender={PatternItemOfList}
+                    list={fileList.getArray()}
+                />
+            </List.Root>
+        </>
     );
 }
