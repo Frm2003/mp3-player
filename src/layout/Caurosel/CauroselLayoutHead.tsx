@@ -1,5 +1,3 @@
-'use server';
-
 import { type ReactNode } from 'react';
 
 import carouselStyle from './styles/carousel.module.css';
@@ -8,7 +6,7 @@ interface iProps {
     length: number;
 }
 
-export default async function CarouselLayoutHead({ length }: iProps) {
+export default function CarouselLayoutHead({ length }: iProps) {
     const inputs: ReactNode[] = [];
 
     for (let index: number = 0; index < length; index++) {
