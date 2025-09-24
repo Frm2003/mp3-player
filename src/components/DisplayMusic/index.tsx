@@ -40,7 +40,7 @@ function ProgressBar() {
     );
 }
 
-export default function PlayerControl() {
+export default function DisplayMusic() {
     const { state, setState } = usePlayerContext();
 
     const { infoMusica, estado, audio } = state;
