@@ -9,7 +9,7 @@ import Musica from '../../utils/Musica';
 import style from './styles/style.module.css';
 
 export default function ModalFiles() {
-    const { fileList } = useListFileContext();
+    const { fileList, forceUpdate } = useListFileContext();
     const { setShow } = useModalContext();
 
     const loadFile = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +31,7 @@ export default function ModalFiles() {
             );
 
             fileList.push(newMusic);
+            forceUpdate();
         }
 
         setShow(false);
