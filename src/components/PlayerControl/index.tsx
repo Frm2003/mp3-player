@@ -6,8 +6,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { usePlayerContext } from '../../contexts/playerContext';
 
-import style from './styles/style.module.css';
 import { useEffect, useRef } from 'react';
+
+import './styles/style.css';
 
 function ProgressBar() {
     const { state } = usePlayerContext();
@@ -33,8 +34,8 @@ function ProgressBar() {
     }, [audio]);
 
     return (
-        <div className={style.progress}>
-            <div ref={progressRef} className={style.actualProgress}></div>
+        <div className='progress'>
+            <div ref={progressRef} className={'actualProgress'}></div>
         </div>
     );
 }
@@ -67,26 +68,17 @@ export default function PlayerControl() {
     const toggleAudio: () => void = estado != 'paused' ? pause : play;
 
     return (
-        <section className={style.layout}>
+        <section className={'playerControl'}>
             <article>
-                <div className={style.main}>
-                    <div className={style.title}>
-                        <h3>{infoMusica?.nome || 'Selecione uma musica'}</h3>
-                        <span>{infoMusica?.artista || '...'}</span>
-                    </div>
-                    <div className={style.icon} onClick={toggleAudio}>
-                        <FontAwesomeIcon icon={icone} size={'1x'} />
-                    </div>
+                <div className={'info'}>
+                    <h3>{infoMusica?.nome || 'Selecione uma música'}</h3>
+                    <span>{infoMusica?.artista || '...'}</span>
                 </div>
-                <ProgressBar />
+                <div className={'btn'} onClick={toggleAudio}>
+                    <FontAwesomeIcon icon={icone} />
+                </div>
             </article>
+            <ProgressBar />
         </section>
     );
 }
-
-/* 
-    <div className={style.btn} onClick={toggleAudio}>
-                    <FontAwesomeIcon icon={icone} size={'2x'} />
-                </div>
-                <ProgressBar />
-*/
