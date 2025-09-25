@@ -1,25 +1,46 @@
-'use client';
-
 import { createContext, type FC, type ReactNode, useContext, useState } from 'react';
 
+interface ModalState {
+    [modalName: string]: boolean;
+}
+
 interface iContext {
-    show: boolean;
-    setShow: React.Dispatch<React.SetStateAction<boolean>>;
+    modals: ModalState;
+    setModal: (name: string, value: boolean) => void;
 }
 
 const ModalContext = createContext<iContext>({
-    show: false,
-    setShow: () => { },
+    modals: {},
+    setModal: () => { },
 });
 
 export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const [show, setShow] = useState<boolean>(false);
+    const [modals, setModals] = useState<ModalState>({});
+
+    const setModal = (name: string, value: boolean): void => {
+        setModals(prev => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     return (
-        <ModalContext.Provider value={{ show, setShow }}>
+        <ModalContext.Provider value={{ modals, setModal }}>
             {children}
         </ModalContext.Provider>
     );
 };
 
 export const useModalContext = (): iContext => useContext(ModalContext);
+
+/* ------------------------------------------------------------------- */
+
+const ModalInternalContext = createContext<{ name: string } | null>(null);
+
+export const useModalInternalContext = () => {
+    const ctx = useContext(ModalInternalContext);
+    if (!ctx) throw new Error("Modal.Title must be used within Modal.Root");
+    return ctx;
+};
+
+export const ModalInternalProvider = ModalInternalContext.Provider;

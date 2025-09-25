@@ -1,32 +1,53 @@
-'use client';
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
-import { type ReactNode, useEffect, useRef } from 'react';
+import { ModalInternalProvider, useModalContext } from './context/ModalContext';
 
-
-import style from './styles/style.module.css';
-import { useModalContext } from './context/ModalContext';
+type Dir = 'top' | 'bottom'
 
 interface iProps {
-    children: ReactNode;
+    children: ReactNode,
+    className?: string,
+    dir?: Dir;
+    name: string,
 }
 
-export default function ModalLayoutRoot({ children }: iProps) {
-    const { show } = useModalContext();
+export default function ModalLayoutRoot({ children, className, dir, name }: iProps) {
+    // CONTEXTO GLOBAL
+    const { modals } = useModalContext();
 
+    // VARIAVEIS DE CONTROLE
     const modalRef = useRef<HTMLElement>(null);
+    const isOpen: boolean = modals[name] === true; /* verifica se está aberta */
 
-    useEffect(() => {
-        if (modalRef.current)
-            modalRef.current.style.marginTop = show ? '0' : `-${200}%`;
-    }, [show]);
+    // OCULTA A MODAL NO PRIMEIRO RENDER
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    // DEFINE O VALOR INICIAL DA MODAL
+    useLayoutEffect(() => {
+        if (!modalRef.current) return;
+        modalRef.current.style.transform = dir === 'top' ? `translateY(-100%)` : 'translateY(100%)';
+        setTimeout(() => { setIsInitialized(true) }, 250);
+    }, [dir]);
+
+    // MONITORA SE A MODAL FOI ABERTA
+    useLayoutEffect(() => {
+        if (!modalRef.current) return;
+
+        const dirValue = dir === 'top' ? `translateY(-100%)` : 'translateY(100%)'
+        modalRef.current.style.transform = isOpen ? 'translateY(0)' : dirValue;
+    }, [isOpen, dir]);
 
     return (
         <section
-            style={{ marginTop: '-200%' }}
-            className={style.layout}
+            className={className}
             ref={modalRef}
+            style={{
+                visibility: isInitialized ? 'visible' : 'hidden',
+            }}
         >
-            <article>{children}</article>
+            <ModalInternalProvider value={{ name }}>
+                <article>{children}</article>
+            </ModalInternalProvider>
         </section>
     );
 }
