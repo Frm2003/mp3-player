@@ -1,16 +1,26 @@
 import { type ChangeEvent } from 'react';
 
-import { useModalContext } from '../../layout/Modal/context/ModalContext';
-import { useListFileContext } from '../../contexts/ListFileContext';
-
+// COMPONENTES
 import Modal from '../../layout/Modal';
+
+// CONTEXTOS
+import { useListFileContext } from '../../contexts/ListFileContext';
+import { useModalContext } from '../../layout/Modal/context/ModalContext';
+
+// UTILS
 import Musica from '../../utils/Musica';
 
-import style from './styles/style.module.css';
+import './styles/style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function ModalFiles() {
+    // CONTEXTOS GLOBAIS
     const { fileList, forceUpdate } = useListFileContext();
-    const { setShow } = useModalContext();
+    const { setModal } = useModalContext();
+
+    // METODOS
+    const closeModal = (): void => { setModal('ModalFiles', false); }
 
     const loadFile = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files as FileList;
@@ -34,50 +44,29 @@ export default function ModalFiles() {
             forceUpdate();
         }
 
-        setShow(false);
+        closeModal();
     };
 
     return (
-        <>
-            <Modal.Root>
-                <div className={style.layout}>
-                    <Modal.Title title={'Selecione os arquivos'} />
-                    <Modal.Body>
-                        <h4>Selecione os arquivos mp3 para reprodução</h4>
-                        <label htmlFor={'files'}>
-                            <p>Selecione os arquivos</p>
-                        </label>
-                        <input
-                            id={'files'}
-                            onChange={loadFile}
-                            type={'file'}
-                            multiple
-                        />
-                    </Modal.Body>
+        <Modal.Root className='modalFiles' dir='top' name='ModalFiles'>
+            <div className="body">
+                <div className="title">
+                    <h3>Selecione os Arquivos</h3>
+                    <button onClick={closeModal}>
+                        <FontAwesomeIcon icon={faTimes} size='2x' />
+                    </button>
                 </div>
-            </Modal.Root >
-        </>
+                <h4>Selecione os arquivos mp3 para reprodução</h4>
+                <label htmlFor={'files'}>
+                    <p>Selecione os Arquivos</p>
+                </label>
+                <input
+                    id={'files'}
+                    onChange={loadFile}
+                    type={'file'}
+                    multiple
+                />
+            </div>
+        </Modal.Root>
     );
 }
-
-/*
-    for (const file of files) {
-                const [artista, nome] = file.name
-                    .replace('.mp3', '')
-                    .split('-');
-
-                const arquivo = URL.createObjectURL(file);
-
-                const musicaNova = new Musica(
-                    nome,
-                    '',
-                    artista,
-                    arquivo,
-                    'mp3'
-                );
-
-                setList((prevList: Musica[]) => [...prevList, musicaNova]);
-            }
-
-            setShow(false);
-*/

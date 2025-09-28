@@ -1,0 +1,62 @@
+.modalFiles {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    transition: all .25s;
+    width: 100%;
+    z-index: 1000;
+}
+
+.modalFiles .body {
+    background: var(--primary-background-color);
+    border: 1px solid var(--main-border-color);
+    border-radius: 5px;
+    margin: auto;
+    padding: 1em;
+    width: 90%;
+}
+
+.modalFiles .title {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.modalFiles .title button {
+    background: none;
+    border: none;
+    color: var(--primary-font-color);
+}
+
+.modalFiles .body label p {
+    background: var(--secondary-background-color);
+    border: 1px solid var(--main-border-color);
+    border-radius: 5px;
+    padding: .75em .5em;
+    text-align: center;
+    transform: translateY(0);
+    transition: all .25s;
+    width: 100%;
+}
+
+.modalFiles .body label p:active {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .5);
+    opacity: .5;
+    transform: translateY(2px);
+}
+
+.modalFiles .body h4 {
+    font-size: 15px;
+    font-weight: 200;
+    padding: .75em 0;
+    text-align: center;
+}
+
+.modalFiles input[type='file'] {
+    display: none;
+}

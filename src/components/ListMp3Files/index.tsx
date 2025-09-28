@@ -9,9 +9,9 @@ import {
 import List from '../../layout/List';
 
 // CONTEXTOS
-import { useModalContext } from '../../layout/Modal/context/ModalContext';
 import { useListFileContext } from '../../contexts/ListFileContext';
 import { usePlayerContext } from '../../contexts/playerContext';
+import { useModalContext } from '../../layout/Modal/context/ModalContext';
 
 // UTILS
 import Musica from '../../utils/Musica';
@@ -37,11 +37,13 @@ const PatternItemOfList = (item: Musica, handleClick: (arg: Musica) => void) => 
 
 export default function ListMp3Files() {
     // CONTEXTOS GLOBAIS
-    const { setShow } = useModalContext();
     const { fileList } = useListFileContext();
     const { state, setState } = usePlayerContext();
+    const { setModal } = useModalContext();
 
     // METODOS
+    const openModal = (): void => { setModal('ModalFiles', true); };
+
     const play = async (musica: Musica): Promise<void> => {
         if (state.audio) state.audio.pause();
 
@@ -69,9 +71,6 @@ export default function ListMp3Files() {
             infoMusica: musica,
         });
     };
-
-
-    const openModal = (): void => setShow((prevState: boolean) => !prevState);
 
     return (
         <>
