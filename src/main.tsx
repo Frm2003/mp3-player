@@ -7,6 +7,7 @@ import './assets/var.css';
 import './assets/global.css';
 import { PlayerProvider } from './contexts/playerContext';
 import { ListFileProvider } from './contexts/ListFileContext';
+import Modal from './layout/Modal';
 
 // ROUTER INSTANCE
 createRouter(routes);
@@ -14,7 +15,9 @@ createRouter(routes);
 createRoot(document.getElementById('root')!).render(
   <PlayerProvider>
     <ListFileProvider>
-      <RouterView />
+      <Modal.Provider>
+        <RouterView />
+      </Modal.Provider>
     </ListFileProvider>
   </PlayerProvider>
 )

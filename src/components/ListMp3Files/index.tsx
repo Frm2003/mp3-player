@@ -59,6 +59,16 @@ export default function ListMp3Files() {
             });
         });
 
+        newAudio.addEventListener('play', () => {
+            newAudio.addEventListener('pause', () => {
+                setState({
+                    audio: newAudio,
+                    estado: 'played',
+                    infoMusica: musica,
+                });
+            });
+        })
+
         newAudio.addEventListener('ended', () => {
             if (musica.next) play(musica.next);
         });

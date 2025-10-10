@@ -1,0 +1,24 @@
+.musicControl {
+    background: var(--secondary-background-color);
+    bottom: 0;
+    position: absolute;
+    transition: all .25s;
+    text-align: center;
+    width: 100%;
+    z-index: 999;
+    padding: 0 1rem;
+}
+
+.musicControl button {
+    background: none;
+    border: none;
+    color: var(--primary-font-color);
+}
+
+.musicControl .control {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    padding: 1em 0;
+    width: 100%;
+}

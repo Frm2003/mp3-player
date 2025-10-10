@@ -4,9 +4,12 @@ import {
     type IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { usePlayerContext } from '../../contexts/playerContext';
-
 import { useEffect, useRef } from 'react';
+
+// CONTEXTOS GLOBAIS
+import { usePlayerContext } from '../../contexts/playerContext';
+import { useModalContext } from '../../layout/Modal/context/ModalContext';
+
 
 import './styles/style.css';
 
@@ -41,11 +44,17 @@ function ProgressBar() {
 }
 
 export default function DisplayMusic() {
+    // CONTEXTOS GLOBAIS
     const { state, setState } = usePlayerContext();
+    const { setModal } = useModalContext();
 
     const { infoMusica, estado, audio } = state;
 
+    // VARIAVEIS
     const icone: IconDefinition = estado != 'paused' ? faPause : faPlay;
+
+    // METODOS
+    const openModal = (): void => { setModal('MusicControl', true); };
 
     const pause = (): void => {
         audio?.pause();
@@ -56,8 +65,8 @@ export default function DisplayMusic() {
         }));
     };
 
-    const play = (): void => {
-        audio?.play();
+    const play = async (): Promise<void> => {
+        await audio?.play();
 
         setState((prev) => ({
             ...prev,
@@ -70,7 +79,7 @@ export default function DisplayMusic() {
     return (
         <section className={'playerControl'}>
             <article>
-                <div className={'info'}>
+                <div className={'info'} onClick={openModal}>
                     <h3>{infoMusica?.nome || 'Selecione uma música'}</h3>
                     <span>{infoMusica?.artista || '...'}</span>
                 </div>
