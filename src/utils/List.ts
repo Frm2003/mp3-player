@@ -24,15 +24,18 @@ export class List<T extends Linkable<T>> {
         if (!this.last) {
             this.first = newItem;
             this.last = newItem;
+            newItem.next = newItem;
+            newItem.back = newItem;
             return;
         }
 
         newItem.back = this.last;
-        this.last.next = newItem;
-        this.last = newItem;
+        newItem.next = this.first;
 
-        this.last.next = this.first;
-        this.first!.back = this.last;
+        this.last.next = newItem;
+        this.first!.back = newItem;
+
+        this.last = newItem;
     }
 
     public getArray(): T[] {
