@@ -59,7 +59,7 @@
 }
 
 .actualProgress {
-    background: darkgreen;
+    background: rgba(0, 200, 0, 1);
     height: 100%;
     width: 0%;
     transition: width 0.05s linear;

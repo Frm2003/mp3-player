@@ -1,9 +1,9 @@
 .musicControl {
     background: var(--secondary-background-color);
     bottom: 0;
-    position: absolute;
-    transition: all .25s;
     text-align: center;
+    position: fixed;
+    transition: all .25s;
     width: 100%;
     z-index: 999;
     padding: 0 1rem;
@@ -15,10 +15,38 @@
     color: var(--primary-font-color);
 }
 
+.musicControl .info {
+    margin: auto;
+    overflow-x: auto;
+    width: 80%;
+}
+
+.musicControl .info * {
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+}
+
 .musicControl .control {
     align-items: center;
     display: flex;
     justify-content: space-around;
-    padding: 1em 0;
+    padding: 1.5em 0;
+    width: 100%;
+}
+
+.musicControl .time {
+    margin: auto;
+    width: 70%;
+}
+
+.musicControl .time input {
+    width: 100%;
+}
+
+.musicControl .time div {
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 0 1.5em 0;
     width: 100%;
 }

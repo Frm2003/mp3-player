@@ -5,6 +5,11 @@
     padding: .5em;
 }
 
+.playing h3 {
+    color: rgba(0, 200, 0, 1);
+    transition: all .5s;
+}
+
 ul {
     margin: auto;
     overflow-y: scroll;
@@ -17,6 +22,12 @@ ul li {
     margin: .5em 0;
     overflow: hidden;
     padding: .75em .5em;
+    transform: scale(1) translateY(0);
+    transition: transform 0.15s ease-in-out;
+}
+
+ul li:active {
+    transform: scale(0.97) translateY(1px);
 }
 
 ul li * {
@@ -48,4 +59,5 @@ ul li .info h3 {
 
 ul li .info span {
     font-size: 13px;
+    opacity: .5;
 }
