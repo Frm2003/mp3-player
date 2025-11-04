@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
 import { ModalInternalProvider, useModalContext } from './context/ModalContext';
 
@@ -13,7 +13,7 @@ interface iProps {
 
 export default function ModalLayoutRoot({ children, className, dir, name }: iProps) {
     // CONTEXTO GLOBAL
-    const { modals } = useModalContext();
+    const { modals, setModal } = useModalContext();
 
     // VARIAVEIS DE CONTROLE
     const modalRef = useRef<HTMLElement>(null);
@@ -21,6 +21,21 @@ export default function ModalLayoutRoot({ children, className, dir, name }: iPro
 
     // OCULTA A MODAL NO PRIMEIRO RENDER
     const [isInitialized, setIsInitialized] = useState(false);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent): void => {
+            if (!isOpen || !modalRef.current) return;
+
+            if (e.key == "Escape") 
+                setModal(name, false);
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [name, isOpen, setModal]);
 
     // DEFINE O VALOR INICIAL DA MODAL
     useLayoutEffect(() => {
