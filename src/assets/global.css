@@ -16,3 +16,10 @@ body {
 table {
     border-spacing: 0;
 }
+
+.modalBackdrop {
+    position: fixed;/* cobre toda a tela */
+    background-color: rgba(0, 0, 0, 0.6); /* leve escurecimento */
+    backdrop-filter: blur(10px); /* desfoque suave */
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+}

@@ -1,4 +1,6 @@
 import { type ChangeEvent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // COMPONENTES
 import Modal from '../../layout/Modal';
@@ -11,8 +13,6 @@ import { useModalContext } from '../../layout/Modal/context/ModalContext';
 import Musica from '../../utils/Musica';
 
 import './styles/style.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function ModalFiles() {
     // CONTEXTOS GLOBAIS
@@ -48,7 +48,7 @@ export default function ModalFiles() {
     };
 
     return (
-        <Modal.Root className='modalFiles' dir='top' name='ModalFiles'>
+        <Modal.Root className='modalBackdrop modalFiles' dir='top' name='ModalFiles'>
             <div className="body">
                 <div className="title">
                     <h3>Selecione os Arquivos</h3>

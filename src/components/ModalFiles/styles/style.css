@@ -1,6 +1,6 @@
 .modalFiles {
     align-items: center;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(var(--secondary-background-color), 0.75);
     display: flex;
     height: 100%;
     justify-content: center;

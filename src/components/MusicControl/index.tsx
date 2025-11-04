@@ -47,7 +47,7 @@ export default function MusicControl() {
     };
 
     return (
-        <Modal.Root className='musicControl' dir='bottom' name='MusicControl'>
+        <Modal.Root className='modalBackdrop musicControl' dir='bottom' name='MusicControl'>
             <button onClick={closeModal}>
                 <FontAwesomeIcon icon={faAngleDown} size={'3x'} />
             </button>
@@ -55,9 +55,9 @@ export default function MusicControl() {
                 {DisplayInfo()}
             </div>
             <div className="control">
-                <FontAwesomeIcon icon={faBackward} onClick={backward} size={'1x'} />
+                <FontAwesomeIcon icon={faBackward} onClick={backward} size={'2x'} />
                 <FontAwesomeIcon icon={icon} onClick={toggleAudio} size={'3x'} />
-                <FontAwesomeIcon icon={faForward} onClick={forward} size={'1x'} />
+                <FontAwesomeIcon icon={faForward} onClick={forward} size={'2x'} />
             </div>
             <div className="time">
                 <input

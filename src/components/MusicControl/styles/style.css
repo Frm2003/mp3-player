@@ -1,12 +1,13 @@
 .musicControl {
     background: var(--secondary-background-color);
+    border-radius: 10px;
     bottom: 0;
-    text-align: center;
+    padding: 0 1rem;
     position: fixed;
     transition: all .25s;
+    text-align: center;
     width: 100%;
     z-index: 999;
-    padding: 0 1rem;
 }
 
 .musicControl button {
@@ -16,23 +17,41 @@
 }
 
 .musicControl .info {
-    margin: auto;
     overflow-x: auto;
-    width: 80%;
 }
 
 .musicControl .info * {
     display: block;
-    text-align: center;
     white-space: nowrap;
+    width: 100%;
+}
+
+.musicControl .info span {
+    font-size: 14px;
+}
+
+.musicControl .info span {
+    opacity: .5;
+    font-size: 15px;
 }
 
 .musicControl .control {
     align-items: center;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 1.5em 0;
-    width: 100%;
+    margin: auto;
+    width: 70%;
+}
+
+.musicControl .control *:nth-child(even) {
+    background: var(--primary-font-color);
+    border-radius: 50%;
+    color: var(--secondary-background-color);
+    display: inline-flex;
+    height: .75em;
+    padding: .25em;
+    width: .75em;
 }
 
 .musicControl .time {
