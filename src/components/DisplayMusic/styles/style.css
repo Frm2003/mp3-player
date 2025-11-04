@@ -14,11 +14,14 @@
 .playerControl article .info {
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 5px;
+    float: left;
+    margin-right: 5%;
     opacity: 1;
     overflow-x: auto;
     padding: .25em .75em;
     transform: translateY(0);
     transition: all .25s;
+    width: 75%;
 }
 
 .playerControl article .info:active {
@@ -33,10 +36,13 @@
     width: 100%;
 }
 
-.playerControl article .info {
-    float: left;
-    width: 75%;
-    margin-right: 5%;
+.playerControl article .info span {
+    font-size: 16px;
+}
+
+.playerControl article .info span {
+    opacity: .5;
+    font-size: 13px;
 }
 
 .playerControl article .btn {
