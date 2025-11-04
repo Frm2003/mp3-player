@@ -10,13 +10,13 @@
     transition: all .5s;
 }
 
-ul {
+.musicList {
     margin: auto;
     overflow-y: scroll;
     width: 90%;
 }
 
-ul li {
+.musicList li {
     align-items: center;
     display: flex;
     margin: .5em 0;
@@ -26,38 +26,38 @@ ul li {
     transition: transform 0.15s ease-in-out;
 }
 
-ul li:active {
+.musicList li:active {
     transform: scale(0.97) translateY(1px);
 }
 
-ul li * {
+.musicList li * {
     float: left;
 }
 
-ul li div:nth-child(odd) {
+.musicList li div:nth-child(odd) {
     align-items: center;
     display: flex;
     justify-content: center;
     width: 10%;
 }
 
-ul li .info {
+.musicList li .info {
     margin: 0 2.5%;
     overflow-x: auto;
     width: 75%;
 }
 
-ul li .info * {
+.musicList li .info * {
     display: block;
     white-space: nowrap;
     width: 100%;
 }
 
-ul li .info h3 {
+.musicList li .info h3 {
     font-size: 16px;
 }
 
-ul li .info span {
+.musicList li .info span {
     font-size: 13px;
     opacity: .5;
 }

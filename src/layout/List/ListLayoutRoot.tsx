@@ -2,9 +2,10 @@ import { useLayoutEffect, useRef, type ReactNode } from 'react';
 
 interface iProps {
     children: ReactNode;
+    className?: string;
 }
 
-export default function ListLayoutRoot({ children }: iProps) {
+export default function ListLayoutRoot({ children, className }: iProps) {
     const ulRef = useRef<HTMLUListElement>(null);
 
     useLayoutEffect(() => {
@@ -23,5 +24,5 @@ export default function ListLayoutRoot({ children }: iProps) {
         };
     }, []);
 
-    return <ul ref={ulRef}>{children}</ul>;
+    return <ul className={className} ref={ulRef}>{children}</ul>;
 }

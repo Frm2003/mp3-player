@@ -41,7 +41,7 @@ export default function ListMp3Files() {
                     onClick={openModal}
                 />
             </div>
-            <List.Root>
+            <List.Root className='musicList'>
                 {
                     musics.map((item: Musica, index: number) => (
                         <PatternList item={item} handleClick={play} key={index} />
