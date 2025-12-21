@@ -1,0 +1,15 @@
+.menuMobile ul {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 1em 0;
+    text-align: center;
+    width: 100%;
+}
+
+.menuMobile ul li {
+    float: left;
+    margin: 0 .25%;
+    width: 32%;
+}

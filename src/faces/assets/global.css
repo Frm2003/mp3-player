@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--primary-background-color);
+    color: var(--primary-font-color);
+    font-family: 'Roboto', sans-serif;
+    overflow-y: hidden;
+}
+
+button svg {
+    pointer-events: none;
+}
+
+table {
+    border-spacing: 0;
+}
+
+.modalBackdrop {
+    position: fixed;/* cobre toda a tela */
+    background-color: rgba(0, 0, 0, 0.6); /* leve escurecimento */
+    backdrop-filter: blur(10px); /* desfoque suave */
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+}
