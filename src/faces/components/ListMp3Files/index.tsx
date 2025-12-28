@@ -4,17 +4,16 @@ import {
     faMusic,
     faPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import { useRef } from 'react';
 
 // COMPONENTES
 import List from '../../layout/List';
 
 // CONTEXTOS
 import { useModalContext } from '../../layout/Modal/context/ModalContext';
-import { useListFileContext } from '../../../functionalities/contexts/ListFileContext';
 
 // HOOKS
 import usePlayerHook from '../../../functionalities/hooks/usePlayerHook';
+import useFilesHook from '../../../functionalities/hooks/useFilesHook';
 
 // UTILS
 import type Musica from '../../../utils/Musica';
@@ -23,12 +22,8 @@ import './styles/style.css';
 
 export default function ListMp3Files() {
     // CONTEXTOS GLOBAIS
-    const { fileList, setFileList } = useListFileContext();
+    const { fileList } = useFilesHook();
     const { setModal } = useModalContext();
-
-    // VARIAVEIS
-    const dragItem = useRef<number | null>(null);
-    const dragOverItem = useRef<number | null>(null);
 
     // HOOK
     const { play } = usePlayerHook();
@@ -36,30 +31,12 @@ export default function ListMp3Files() {
     // METODOS
     const openModal = (): void => { setModal('ModalFiles', true); };
 
-    const handleDrop = () => {
-        if (dragItem.current === null || dragOverItem.current === null) return;
-
-        const items = [...fileList];
-        const draggedItem = items[dragItem.current];
-
-        items.splice(dragItem.current, 1);
-        items.splice(dragOverItem.current, 0, draggedItem);
-
-        dragItem.current = null;
-        dragOverItem.current = null;
-
-        setFileList(items);
-    };
-
     return (
         <>
             <div className='title'>
                 <h2>Lista de reprodução</h2>
                 <button onClick={openModal}>
-                    <FontAwesomeIcon
-                        icon={faPlus}
-                        size={'2x'}
-                    />
+                    <FontAwesomeIcon icon={faPlus} size={'2x'} />
                 </button>
             </div>
             <List.Root className='musicList'>
@@ -70,9 +47,6 @@ export default function ListMp3Files() {
                             index={index}
                             key={index}
                             musica={musica}
-                            onDragStart={() => (dragItem.current = index)}
-                            onDragEnter={() => (dragOverItem.current = index)}
-                            onDragEnd={handleDrop}
                         />
                     ))
                 }
@@ -85,30 +59,17 @@ const PatternList = ({
     handleClick,
     index,
     musica,
-    onDragStart,
-    onDragEnter,
-    onDragEnd
 }: {
     handleClick: (index: number) => void,
     index: number,
     musica: Musica,
-    onDragStart: () => void;
-    onDragEnter: () => void;
-    onDragEnd: () => void;
 }) => {
     const { isPlaying } = usePlayerHook();
 
     const isPlayingClass = isPlaying(musica) ? 'playing' : 'none';
 
     return (
-        <li
-            className={isPlayingClass}
-            draggable
-            onDragStart={onDragStart}
-            onDragEnter={onDragEnter}
-            onDragEnd={onDragEnd}
-            onDragOver={(e) => e.preventDefault()}
-        >
+        <li className={isPlayingClass}>
             <div>
                 <FontAwesomeIcon icon={faMusic} size={'1x'} />
             </div>

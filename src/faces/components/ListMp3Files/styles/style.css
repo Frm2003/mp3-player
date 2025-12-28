@@ -5,6 +5,12 @@
     padding: .5em;
 }
 
+.title button {
+    background: none;
+    border: none;
+    color: var(--primary-font-color);
+}
+
 .playing h3 {
     color: rgba(0, 200, 0, 1);
     transition: all .5s;
