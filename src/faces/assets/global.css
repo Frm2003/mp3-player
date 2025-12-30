@@ -22,8 +22,21 @@ table {
 }
 
 .modalBackdrop {
-    position: fixed;/* cobre toda a tela */
-    background-color: rgba(0, 0, 0, 0.6); /* leve escurecimento */
-    backdrop-filter: blur(10px); /* desfoque suave */
-    -webkit-backdrop-filter: blur(10px); /* Safari */
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.title {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: .5em;
+}
+
+.title button {
+    background: none;
+    border: none;
+    color: var(--primary-font-color);
 }
