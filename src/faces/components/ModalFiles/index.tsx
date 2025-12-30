@@ -4,12 +4,13 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 // COMPONENTES
 import Modal from '../../layout/Modal';
 
-import './styles/style.css';
 import useFilesHook from '../../../functionalities/hooks/useFilesHook';
+
+import './styles/style.css';
 
 export default function ModalFiles() {
     // CONTEXTOS GLOBAIS
-    const { closeModalFiles, loadFiles } = useFilesHook();
+    const { closeModalFiles, loadLocalFiles } = useFilesHook();
 
     return (
         <Modal.Root className='modalBackdrop modalFiles' dir='top' name='ModalFiles'>
@@ -26,7 +27,7 @@ export default function ModalFiles() {
                 </label>
                 <input
                     id={'files'}
-                    onChange={loadFiles}
+                    onChange={loadLocalFiles}
                     type={'file'}
                     multiple
                 />
