@@ -1,8 +1,11 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+
+import { downloadFile, getInfo, streamFile } from "../services/AudioService";
 
 import { useListFileContext } from "../contexts/ListFileContext";
-import Musica from "../../utils/Musica";
 import { useModalContext } from "../../faces/layout/Modal/context/ModalContext";
+
+import Musica from "../../utils/Musica";
 
 export default function useFilesHook() {
     const { fileList, setFileList } = useListFileContext();
@@ -11,7 +14,7 @@ export default function useFilesHook() {
     // METODOS
     const closeModalFiles = (): void => { setModal('ModalFiles', false); }
 
-    const loadFiles = async (event: ChangeEvent<HTMLInputElement>) => {
+    const loadLocalFiles = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files as FileList;
         const musics: Musica[] = [];
 
@@ -37,9 +40,28 @@ export default function useFilesHook() {
         closeModalFiles();
     };
 
+    const streamFileAudio = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+
+        const bodyRequest: Record<string, FormDataEntryValue | null> = {
+            url: formData.get("url"),
+        };
+
+        const fileInfo = await getInfo(bodyRequest);
+        await downloadFile(bodyRequest);
+
+        const audioUrl = await streamFile();
+        const newMusic = new Musica(fileInfo.fileName, "", fileInfo.uploader, audioUrl, 'youtube')
+
+        setFileList(prevState => [...prevState, newMusic]);
+    };
+
     return {
-        loadFiles,
-        fileList,
         closeModalFiles,
+        fileList,
+        streamFileAudio,
+        loadLocalFiles,
     };
 }

@@ -1,0 +1,88 @@
+.formDownload {
+    margin: auto;
+    position: relative;
+    width: 80%;
+}
+
+.formDownload .body {
+    background: var(--secondary-background-color);
+    border-radius: 10px;
+    padding: 1em;
+    position: absolute;
+    top: 30%;
+    width: 100%;
+}
+
+.formDownload input {
+    border-bottom: 1px solid var(--main-border-color);
+    border-radius: 10px;
+    margin-bottom: 1.25em;
+    padding: .75em;
+    width: 100%;
+}
+
+.formDownload p {
+    font-size: 13px;
+    font-weight: lighter;
+    margin: .5em 0;
+}
+
+.formDownload .btnContainer {
+    border-top: 3px solid var(--main-border-color);
+    padding: 0.5em;
+}
+
+.formDownload .btnContainer button {
+    background: var(--primary-background-color);
+    border: 1px solid var(--main-border-color);
+    border-radius: 5px;
+    color: var(--primary-font-color);
+    padding: .75em .5em;
+    text-align: center;
+    transform: translateY(0);
+    transition: all .25s;
+    width: 100%;
+}
+
+.formDownload button:active {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .5);
+    opacity: .5;
+    transform: translateY(2px);
+}
+
+.formLoading {
+    align-items: center;
+    animation: appear 0.3s ease-out forwards;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+}
+
+.formLoading svg {
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        transform: 1;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

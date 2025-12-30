@@ -1,7 +1,6 @@
 import {
+    faDownload,
     faFileAudio,
-    faGear,
-    faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Caurosel from '../../layout/Caurosel';
@@ -19,13 +18,8 @@ export default function MenuMobile() {
                 </li>
                 <li>
                     <Caurosel.CustomControl id={'s0'} page={1}>
-                        <FontAwesomeIcon icon={faSearch} size={'xl'} />
+                        <FontAwesomeIcon icon={faDownload} size={'xl'} />
                     </Caurosel.CustomControl>
-                </li>
-                <li>
-                     <Caurosel.CustomControl id={'s0'} page={2}>
-                        <FontAwesomeIcon icon={faGear} size={'xl'} />
-                     </Caurosel.CustomControl>
                 </li>
             </ul>
         </nav>

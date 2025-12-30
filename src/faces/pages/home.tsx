@@ -6,6 +6,7 @@ import DisplayMusic from "../components/DisplayMusic";
 import MusicControl from "../components/MusicControl";
 import Caurosel from "../layout/Caurosel";
 import MenuMobile from "../components/MenuMobile";
+import FormDownload from "../components/FormDownload";
 
 const firstPage: ReactNode = (
     <>
@@ -16,7 +17,7 @@ const firstPage: ReactNode = (
 
 const secondPage: ReactNode = (
     <>
-        <h1>page 2</h1>
+        <FormDownload />
     </>
 );
 
